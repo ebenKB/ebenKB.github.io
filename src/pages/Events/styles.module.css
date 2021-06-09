@@ -1,0 +1,14 @@
+.wrapper {
+  width: 86%;
+  margin: auto;
+}
+
+.wrapper .item {
+  margin: 10px 0;
+}
+
+.formControl {
+  margin: 4px;
+  min-width: 120px;
+  padding: 4px;
+}

@@ -1,0 +1,8 @@
+.tag {
+  font-size: 0.70rem;
+  color: grey;
+}
+
+.wrapper span:not(:last-child){
+  margin-right: 5px;
+}

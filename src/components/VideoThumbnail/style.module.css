@@ -1,0 +1,53 @@
+.thumbnailWrapper {
+  border-radius: 8px;
+  background-color:gray;
+  position: relative;
+  color: var(--black);
+}
+
+.thumbnailWrapper.big {
+  width: 100%;
+  height: 180px;
+}
+
+.thumbnailWrapper.small {
+  width: 100%;
+  height: 120px;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+}
+
+.thumbnail .curve {
+  border-radius: 8px;
+}
+
+.link {
+  color: var(--black);
+}
+
+.icon {
+  width: 40px;
+  height: 100%;
+  margin: auto;
+  position: absolute;
+  left: calc(50% - 20px);
+  top: 40px;
+  fill: rgb(180, 180, 180);
+}
+
+.thumbnailWrapper.big .icon {
+  top: 75px;
+}
+
+.caption {
+  font-size: 0.75rem;
+}

@@ -1,0 +1,23 @@
+.wrapper {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.wrapper a {
+  color: var(--black);
+}
+
+.content {
+  
+}
+
+.detailsWrapper {
+  width: 90%;
+  margin: auto;
+}
+
+.detailsWrapper .content {
+  color: rgba(0, 0, 0, 0.5);
+  padding-bottom: 40px;
+}

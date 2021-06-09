@@ -1,0 +1,15 @@
+@tailwind utilities;
+:root {
+  --lightGrey: rgb(197, 197, 197);
+  --yellow: #FBCC27;
+  --black: #000;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.App-link {
+  color: #61dafb;
+}

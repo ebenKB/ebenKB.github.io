@@ -1,0 +1,14 @@
+.wrapper {
+  padding-bottom: 40px;
+}
+
+.wrapper h3 {
+  padding: 4px;
+  font-size: 0.8rem;
+}
+
+.thumbnails {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+}

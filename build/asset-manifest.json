@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a5b95026.chunk.css",
+    "main.js": "/static/js/main.452c23e2.chunk.js",
+    "main.js.map": "/static/js/main.452c23e2.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.11f320ca.js",
+    "runtime-main.js.map": "/static/js/runtime-main.11f320ca.js.map",
+    "static/css/2.81cb548f.chunk.css": "/static/css/2.81cb548f.chunk.css",
+    "static/js/2.6fda7f92.chunk.js": "/static/js/2.6fda7f92.chunk.js",
+    "static/js/2.6fda7f92.chunk.js.map": "/static/js/2.6fda7f92.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.81cb548f.chunk.css.map": "/static/css/2.81cb548f.chunk.css.map",
+    "static/css/main.a5b95026.chunk.css.map": "/static/css/main.a5b95026.chunk.css.map",
+    "static/js/2.6fda7f92.chunk.js.LICENSE.txt": "/static/js/2.6fda7f92.chunk.js.LICENSE.txt",
+    "static/media/calendar.15165ea6.svg": "/static/media/calendar.15165ea6.svg",
+    "static/media/down-chevron.5c07ce46.svg": "/static/media/down-chevron.5c07ce46.svg",
+    "static/media/home.205e5c86.svg": "/static/media/home.205e5c86.svg",
+    "static/media/overlap.26f9e4b9.svg": "/static/media/overlap.26f9e4b9.svg",
+    "static/media/play.6b3a02fa.svg": "/static/media/play.6b3a02fa.svg",
+    "static/media/send.104ae024.svg": "/static/media/send.104ae024.svg",
+    "static/media/video-camera.27cc5a6b.svg": "/static/media/video-camera.27cc5a6b.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.11f320ca.js",
+    "static/css/2.81cb548f.chunk.css",
+    "static/js/2.6fda7f92.chunk.js",
+    "static/css/main.a5b95026.chunk.css",
+    "static/js/main.452c23e2.chunk.js"
+  ]
+}

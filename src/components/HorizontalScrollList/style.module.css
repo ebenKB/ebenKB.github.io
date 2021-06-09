@@ -1,0 +1,26 @@
+.hScrollWrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hScrollWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  min-width: 120px;
+  height: 80px;
+  margin: 4px;
+}
+
+.item img{
+  width: 100%;
+  height: 100%;
+}
+
+.caption {
+  font-size: 0.8rem;
+  padding: 0 8px;
+}
