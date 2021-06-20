@@ -10,7 +10,6 @@ import { ReactComponent as Send } from "../../assets/images/send.svg";
 const Navigation = () => {
 
   const isActiveLink = (match, loc, current) => {
-    console.log("This is the active link", match, loc);
     if (!match) {
       return false;
     }

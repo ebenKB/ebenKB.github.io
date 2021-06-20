@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import  { getAyoba }  from './microapp'
 import "./App.css" ;
 import MainLayout from "./components/MainLayout/MainLayout";
@@ -16,8 +16,23 @@ import ArticleDetails from "./pages/Articles/ArticleDetails";
 import EventDetails from "./pages/Events/EventDetails";
 import VideoDetails from "./pages/Videos/VideoDetails";
 import PlaceDetails from "./pages/Places/PlaceDetails";
+import { addCategories } from "./features/categories/categorySlice";
+import { useDispatch, useSelector } from "react-redux";
+import Axios from "axios";
 
 export default function App() {
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.data);
+
+  useEffect(() => {
+    if (categories.length === 0) {
+      Axios.get("https://heritage.bypulse.africa/wp-json/wp/v2/categories")
+      .then((res) => {
+        dispatch(addCategories(res.data));
+      })
+    }
+  }, []);
+
   return (
     <Router>
       <Switch>
