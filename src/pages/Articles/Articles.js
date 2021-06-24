@@ -5,41 +5,36 @@ import { Grid } from '@material-ui/core';
 import ImageCaption from "../../components/ImageCaption/ImageCaption";
 import ImageWithText from "../../components/ImageWithText/ImageWithText";
 import { Link } from "react-router-dom";
-import WPAPI from 'wpapi';
+import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
-import { selectCategoryBySlug } from '../../features/categories/categorySlice'
+import { addArticles } from '../../features/articles/articleSlice';
 
 const Articles = props => {
-  const [page, setPage] = useState("");
+  const articles = useSelector((state) => state.articles.data);
+  const dispatch = useDispatch();
+  const category = useSelector((state) =>
+    state.categories.data.find((cat) => cat.slug === "articles"))
+
   useEffect(() => {
-    // const wp = new WPAPI({ endpoint: 'https://heritage.bypulse.africa/wp-json' });
-    // wp.posts().get(function( err, data ) {
-    //   if ( err ) {
-    //       // handle err
-    //   }
-    //   // do something with the returned posts
-    //   console.log(data)
-    // });
-    
-    Axios.get("https://heritage.bypulse.africa/wp-json/wp/v2/categories")
-    .then((data) => {
-      console.log("Categories", data)
-      // setPage(data);
-    })
+    if (category) {
+      getArticles();
+    }
+}, [category]);
 
-    Axios.get("https://heritage.bypulse.africa/wp-json/wp/v2/posts?per_page=10&categories=2")
-    .then((data) => {
-      console.log("Data", data)
-    })
+const getArticles = async () => {
+  const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/posts?per_page=10&categories=${category.id}`);
+  dispatch(addArticles(res.data));
+}
 
-    console.log("this is the category", selectCategoryBySlug("articles"))
-}, [])
   return (
     <div>
-      {page.data && (
-         <p dangerouslySetInnerHTML={{__html: page.data[0].content.rendered}} /> 
-      )}
       <ImageWithText />
+      {articles.map((article) =>
+        <p>
+          <h1>hello {article.id}</h1>
+          {article.content.rendered}
+        </p>
+      )}
       <div className={styles.wrapper}>
         <Grid container spacing={3} classes={{root: styles.content}} >
             <Grid item xs={6}>

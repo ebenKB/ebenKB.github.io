@@ -2,11 +2,12 @@ import React from 'react';
 import ReactPlayer from 'react-player'
 // import PropTypes from 'prop-types'
 
-const VideoPlayer = props => {
+const VideoPlayer = ({ videoUrl }) => {
   return (
     <ReactPlayer 
-      url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
+      url={videoUrl}
       width='100%'
+      autoPlay
     />
   )
 }

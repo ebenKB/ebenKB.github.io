@@ -19,7 +19,11 @@ export const categorySlice = createSlice({
 })
 
 export const { addCategories } = categorySlice.actions;
-export const selectCategoryBySlug = (slug) => {
-  return state.data.find((cat) => cat.slug === slug);
-}
+// export const selectCategoryBySlug = (state) => {
+//   state.categories.data.find((cat) => cat.slug === slug)
+// }
+
+// export const selectCategoryBySlug = (state) => (slug) => {
+//   state.categories.data.find((cat) => cat.slug === slug)
+// }
 export default categorySlice.reducer;
