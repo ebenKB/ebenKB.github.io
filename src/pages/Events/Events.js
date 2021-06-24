@@ -1,15 +1,50 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import PropTypes from 'prop-types'
 import EventItem from "../../components/EventItem/EventItem";
 import styles from "./styles.module.css";
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import Axios from "axios";
+import { addEvents } from "../../features/events/eventsSlice";
+import Loader from '../../components/Loader/Loader';
 
 const Events = props => {
+  const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState("");
+  const events = useSelector((state) => state.events.data);
+  const [filteredEvents, setFilteredEvents] = useState(events);
+  const regions = useSelector((state) => state.regions.data);
+
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setFilter(e.target.value);
+    const { value } = e.target;
+    setFilter(value);
+    console.log("Filter", value);
+    const rem = events.filter((event) =>
+      event.acf.region.trim().toLowerCase() === value.trim().toLowerCase());
+      console.log("rem: ", rem);
+    setFilteredEvents(rem);
   }
+
+  const getEvents = async () => {
+    setLoading(true);
+    const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/events`);
+    dispatch(addEvents(res.data));
+    setLoading(false);
+    setFilteredEvents(res.data);
+  }
+
+  useEffect(() => {
+    getEvents();
+  }, []);
+
+  // useEffect(() => {
+  //   if (filter !== "") {
+  //     const rem = filteredEvents.map((event) => event.acf.region.trim().toLocaleLowerCase() === filter.trim().toLocaleLowerCase());
+  //     setFilteredEvents(rem);
+  //   }
+  // }, [filter]);
 
   return (
     <div className={styles.wrapper}>
@@ -26,26 +61,18 @@ const Events = props => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {regions && regions.map((region) => (
+            <MenuItem value={region.name.trim()}>{region.name}</MenuItem>
+          ))}
         </Select>
       </FormControl>
-      <div className={styles.item}>
-        <EventItem />
-      </div>
-      <div className={styles.item}>
-        <EventItem />
-      </div>
-      <div className={styles.item}>
-        <EventItem />
-      </div>
-      <div className={styles.item}>
-        <EventItem />
-      </div>
-      <div className={styles.item}>
-        <EventItem />
-      </div>
+      {loading && <Loader />}
+      {filteredEvents && filteredEvents.map((event) => (
+        <div className={styles.item}>
+          <EventItem event={event} />
+        </div>
+        )
+      )}
     </div>
   )
 }

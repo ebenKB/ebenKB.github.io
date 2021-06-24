@@ -1,12 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // import PropTypes from 'prop-types';
 import './Carousel.css';
 import { Carousel } from 'antd';
 import { RightCircleOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
+import Axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
+import { addTags } from '../../features/tags/tagsSlice';
+import { Link } from "react-router-dom";
+import Loader from '../Loader/Loader';
+import { getTrimmedText } from '../../utils/app';
 
 const CarouselWrapper = (props) => {
+  const [loading, setLoading] = useState(false);
   const carousel = React.createRef();
+  const dispatch = useDispatch();
+  const featuredTag = useSelector((state) => state.tags.tags.find((tag) => tag.slug === "featured"));
+  const [featuredArticles, setFeaturedArticles] = useState(null);
+
+  const getTags = async () => {
+    setLoading(true);
+    const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/tags`)
+    dispatch(addTags(res.data));
+  }
+
+  const getFeaturedArticles = async () => {
+    if (featuredTag) {
+      const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/articles?_embed&per_page=5&tags[]=${featuredTag.id}`);
+      setFeaturedArticles(res.data);
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getTags();
+  }, []);
+
+  useEffect(() => {
+    getFeaturedArticles();
+  }, [featuredTag])
 
   const onChange = () => {
     console.log("This is a slider")
@@ -15,52 +47,48 @@ const CarouselWrapper = (props) => {
   const contentStyle = {
     height: '180px',
     width: "100%",
-    // color: '#fff',
-    // lineHeight: '180px',
     textAlign: 'center',
     background: '#364d79',
+    position: "relative",
   };
 
   return (
     <div className="carousel_wrapper">
-      <div className="controls">
-        <div className="item navLeft" onClick={() => carousel.current.prev()}><LeftCircleOutlined /></div>
-        <div className="item navRight" onClick={() => carousel.current.next()}><RightCircleOutlined /></div>
-      </div>
-      <Carousel
-        afterChange={onChange}
-        autoplay={false}
-        dotPosition="bottom"
-        arrows={false} 
-        ref={carousel}
-        // dotsClass="dot-class"
-        // nextArrow={<div style={{ position: "absolute", zIndex:"3", color: "red", background: "red", width: "40px", height: "40px"}}><RightCircleOutlined /> </div>}
-        // prevArrow={(<div><LeftCircleOutlined /></div>)}
-        
-
-      >
-        <div>
-          {/* <h3 style={contentStyle}>1</h3> */}
-          <div style={contentStyle}>
-            <img style={contentStyle} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJF-FFYxk8x__1i7aCHN-UWIA60CZ0ZU1nmA&usqp=CAU" alt=""/>
+      {loading && <Loader />}
+      {featuredArticles && (
+        <>
+          <div className="controls">
+            <div className="item navLeft" onClick={() => carousel.current.prev()}><LeftCircleOutlined /></div>
+            <div className="item navRight" onClick={() => carousel.current.next()}><RightCircleOutlined /></div>
           </div>
-        </div>
-        <div>
-        <div style={contentStyle}>
-            <img style={contentStyle} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCGdsvJtB0rQ0fbwgHUi_zUVWSpsHWi7cG-g&usqp=CAU" alt=""/>
-          </div>
-        </div>
-        <div>
-          <div style={contentStyle}>
-            <img style={contentStyle} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_jT7jMVHbWWrMZl1eYPkQZpUqvz3oPO-mYQ&usqp=CAU" alt=""/>
-          </div>
-        </div>
-        <div>
-          <div style={contentStyle}>
-            <img style={contentStyle} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-hprJD6Rr10YUYJBVdF-RSqC0kG7f38dqAA&usqp=CAU" alt=""/>
-          </div>
-        </div>
-      </Carousel>
+          <Carousel
+            afterChange={onChange}
+            autoplay={false}
+            dotPosition="bottom"
+            arrows={false} 
+            ref={carousel}
+            // dotsClass="dot-class"
+            // nextArrow={<div style={{ position: "absolute", zIndex:"3", color: "red", background: "red", width: "40px", height: "40px"}}><RightCircleOutlined /> </div>}
+            // prevArrow={(<div><LeftCircleOutlined /></div>)
+          >
+            {featuredArticles.map((article) => (
+              <div className="carousel_content">
+                <div style={contentStyle}>
+                  <Link to={`/articles/${article.id}`}>
+                    <img style={contentStyle} 
+                    src={article._embedded["wp:featuredmedia"][0].source_url} alt=""
+                  />
+                  </Link>
+                </div>
+                <div className="carousel_title">
+                  <p dangerouslySetInnerHTML={{__html: getTrimmedText(article.title.rendered)}} />
+                </div>
+              </div>
+            ))}
+            {/* <h3 style={contentStyle}>1</h3> */}
+          </Carousel>
+        </>
+      )}
     </div>
   )
 }

@@ -15,20 +15,22 @@ const EventItem = ({ event }) => {
         </Grid>
         <Grid item xs={6}>
           <div className="font-bold">
-            Asafoatse Festival
+            <Link to={`/events/${event.id}`}>{event.acf.title}</Link>
           </div>
           <div className={`${styles.iconCaption} ${styles.faint}`}>
             <LocationOnIcon />
-            <div>Location</div>
+            <div className="">{event.acf.region}</div>
           </div>
           <div>
-            <Link to="/events/34">More Info</Link>
+            <Link to={`/events/${event.id}`}>More Info</Link>
           </div>
         </Grid>
         <Grid item xs={3}>
-          <img src="https://live.staticflickr.com/7528/15711784487_bce4695afc_b.jpg" alt="" 
-            className="w-full"
-          />
+          <Link to={`/events/${event.id}`}>
+            <img src={event.acf.pictures} alt="" 
+              className="w-full"
+            />
+          </Link>
         </Grid>
       </Grid>
     </div>

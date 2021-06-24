@@ -3,11 +3,18 @@
   bottom: 10px;
   color: white;
   margin: auto;
-  left: 10px;
+  /* left: 10px; */
+  width: 100vw;
+  text-align: center;
 }
 
 .wrapper {
   position: relative;
+}
+
+
+.fixed {
+  height: 120px;
 }
 
 .overlay{ 

@@ -3,6 +3,7 @@
   --lightGrey: rgb(197, 197, 197);
   --yellow: #FBCC27;
   --black: #000;
+  --white: rgb(223, 223, 223);
 }
 
 .container {
@@ -11,5 +12,5 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--black);
 }
