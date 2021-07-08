@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import HScrollList from "../../components/HorizontalScrollList/HorizontalScrollList";
 import { useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
-// import GoogleMapReact from 'google-map-react';
+import Map from "../../components/GoogleMap/GoogleMap";
 
 const PlaceDetails = (props) => {
   const { id } = useParams();
@@ -25,24 +25,12 @@ const PlaceDetails = (props) => {
             <img src={place.acf.file} alt="" className="w-full" />
             <p>{place.acf.description}</p>
           </div>
-          <div className="p-10 bg-gray-200 mb-5">
-          {/* <div style={{ height: '40vh', width: '100%' }}>
-            <GoogleMapReact
-              // bootstrapURLKeys={{ key:  }}
-              defaultCenter={props.center}
-              defaultZoom={props.zoom}
-            >
-              <div
-                lat={59.955413}
-                lng={30.337844}
-                text="My Marker"
-              >
-                hello
-              </div>
-            </GoogleMapReact>
-          </div> */}
+          <div className="bg-gray-200 mb-5">
+            <Map  location={place.acf.map }/>
           </div>
-          <HScrollList />
+          <div className="mt-5 mb-5">
+            <HScrollList />
+          </div>
           <div className="container pt-5">
             <p>{place.acf.content}</p>
           </div>
