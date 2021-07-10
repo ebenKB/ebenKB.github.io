@@ -6,6 +6,7 @@ import { Grid } from "@material-ui/core";
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
+import YoutubeEmbed from '../../components/YoutubeEmbed.js/YoutubeEmbed';
 
 const VideoDetails = () => {
   const { id } = useParams();
@@ -31,7 +32,13 @@ const VideoDetails = () => {
       </div>
       {video && (
         <>
-          <VideoPlayer caption={video.title.rendered} videoUrl={video.acf.video_url}/>
+          {!video.acf.youtube_url && video.acf.video_url &&
+            <VideoPlayer caption={video.title.rendered} videoUrl={video.acf.video_url}/>}
+          {video.acf.youtube_url && 
+            <YoutubeEmbed
+              embedId={video.acf.youtube_video_id}
+              title={video.title.rendered}
+            />}
           <div className="container">
             <div className="mt-5">
               {relatedVideos && relatedVideos.length > 0 ? <h2 className="font-bold">Related Videos</h2> : null}
