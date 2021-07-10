@@ -13,8 +13,8 @@ const StoryItem = ({ story }) => {
           <Grid md={12} item style={{width: "100%"}}>
             <VideoThumbnail 
               dataId={story.id} 
-              imageUrl={story._embedded["wp:featuredmedia"][0].source_url} 
-              type={story._embedded["wp:featuredmedia"][0].media_type}
+              imageUrl={story._embedded["wp:featuredmedia"] && story._embedded["wp:featuredmedia"][0].source_url} 
+              type={story._embedded["wp:featuredmedia"] && story._embedded["wp:featuredmedia"][0].media_type}
             />
             {/* <video controls width="100%" height="auto" style={{maxWidth: "100%", borderRadius: "10px"}}>
               <source src="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"

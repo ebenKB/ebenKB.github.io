@@ -41,7 +41,7 @@
   position: absolute;
   left: calc(50% - 20px);
   top: 40px;
-  fill: rgb(180, 180, 180);
+  fill: rgb(241, 241, 241);
 }
 
 .thumbnailWrapper.big .icon {
@@ -50,4 +50,16 @@
 
 .caption {
   font-size: 0.75rem;
+}
+
+.embedCaption {
+  position: absolute;
+  bottom: 4px;
+  text-align: center;
+  width: 100%;
+}
+
+.embedCaption *{
+  color: var(--white);
+  font-weight: 600;
 }

@@ -10,7 +10,6 @@ const Trends = (props) => {
 
   const getTrendingPlaces = async () => {
     const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/places?_embed&per_page=3`);
-    console.log("trends", res)
     setTrendingPlaces(res.data);
   }
 

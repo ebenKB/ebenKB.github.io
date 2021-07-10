@@ -29,9 +29,9 @@ const ArticleDetails = () => {
             <h2 className="font-bold">{article.acf.title}</h2>
           </div>
           <ImageCaption
-            imageUrl={article._embedded['wp:featuredmedia'][0].source_url} 
+            imageUrl={article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url} 
             caption={(
-              <span dangerouslySetInnerHTML={{__html: article._embedded['wp:featuredmedia'][0].caption.rendered}} />
+              <span dangerouslySetInnerHTML={{__html: article._embedded['wp:featuredmedia'] !== undefined ? article._embedded['wp:featuredmedia'][0].caption.rendered : null}} />
             )}
           />
           <div className={`${styles.content}`}>

@@ -1,6 +1,7 @@
 .wrapper {
-  width: 86%;
+  width: 90%;
   margin: auto;
+  padding-bottom: 60px;
 }
 
 .wrapper .item {

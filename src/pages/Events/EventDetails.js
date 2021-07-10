@@ -5,6 +5,7 @@ import HashTag from "../../components/HashTag/HashTag";
 import Map from "../../components/GoogleMap/GoogleMap";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { format } from "date-fns";
 
 
 const EventDetails = props => {
@@ -26,7 +27,10 @@ const EventDetails = props => {
       <div className="container pt-5">
         <h3 className="font-bold" dangerouslySetInnerHTML={{__html:event.acf.title}} />
         <p>{event.acf.description}</p>
-        <p className="text-gray-400">{event.acf.date_of_event}</p>
+        <p className="text-gray-400">
+          {format(new Date(event.acf.date_of_event), "eee, do MMMM yyyy")}
+          <span>&nbsp;{event.acf.time_of_event}</span>
+        </p>
       </div>
       <div className="bg-gray-300">
         <Map  location={event.acf.location }/>
@@ -37,7 +41,12 @@ const EventDetails = props => {
         <div className="mt-2 pb-12">
           <HashTag tags={["#tag1", "#tag2"]} />
         </div>
-        <HScroll path="events" items={transformEvents(upcomingEvents)} />
+        {transformEvents.length > 0 && (
+          <>
+            <h3>Related Events</h3>
+            <HScroll path="events" items={transformEvents(upcomingEvents)} />
+          </>
+        )}
         <div className="mt-2 pb-12">
           {/* <HashTag tags={["#tag1", "#tag2"]} /> */}
         </div>

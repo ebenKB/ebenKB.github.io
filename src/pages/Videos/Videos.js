@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addVidoes } from '../../features/videos/videosSlice';
 import axios from 'axios';
 import Loader from '../../components/Loader/Loader';
+import { getTrimmedText } from '../../utils/app';
 
 const VideoTrends = () => {
   // const category = useSelector((state) =>
@@ -45,6 +46,7 @@ const VideoTrends = () => {
           imageUrl={recentVideo.acf.thumbnail}
           dataId={recentVideo.id}
           path="videos"
+          embed_caption={getTrimmedText(recentVideo.title.rendered)}
         />
       )}
       <div className={`${styles.thumbnails}`}>

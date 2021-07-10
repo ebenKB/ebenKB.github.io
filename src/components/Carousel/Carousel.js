@@ -76,7 +76,7 @@ const CarouselWrapper = (props) => {
                 <div style={contentStyle}>
                   <Link to={`/articles/${article.id}`}>
                     <img style={contentStyle} 
-                    src={article._embedded["wp:featuredmedia"][0].source_url} alt=""
+                    src={article._embedded["wp:featuredmedia"] && article._embedded["wp:featuredmedia"][0].source_url} alt=""
                   />
                   </Link>
                 </div>

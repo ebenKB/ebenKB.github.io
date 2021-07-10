@@ -42,9 +42,9 @@ const Home = props => {
         <Grid container spacing={2}>
           {allArticles && allArticles.map((article) => (
             <Grid item xs={6}>
-              <Link to={`/articles/${article.id}`}>
+              <Link to={`/articles/${article.id}`} className="App-link">
                 <ImageCaption
-                  imageUrl={article._embedded['wp:featuredmedia'][0].source_url}
+                  imageUrl={article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url}
                   caption={getTrimmedText(article.title.rendered)}
                   fixed
                 />

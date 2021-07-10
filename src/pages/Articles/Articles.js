@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
 import { addArticles } from '../../features/articles/articleSlice';
 import Loader from '../../components/Loader/Loader';
+import { getTrimmedText} from "../../utils/app";
 
 const Articles = (props) => {
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ const Articles = (props) => {
       {latestArticle && <Link to={`/articles/${latestArticle.id}`}>
         <ImageWithText
           imageUrl={latestArticle._embedded['wp:featuredmedia'][0].source_url}
-          caption={latestArticle.title.rendered}
+          caption={getTrimmedText(latestArticle.title.rendered)}
           fixed={false}
         />
       </Link>}
@@ -46,8 +47,8 @@ const Articles = (props) => {
               <Grid item xs={6}>
                 <Link to={`/articles/${article.id}`}>
                   <ImageCaption  
-                    imageUrl={article._embedded['wp:featuredmedia'][0].source_url}
-                    caption={article.title.rendered}
+                    imageUrl={article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url}
+                    caption={getTrimmedText(article.title.rendered)}
                     fixed
                   />
                 </Link>
