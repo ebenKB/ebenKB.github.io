@@ -42,7 +42,7 @@ const VideoDetails = () => {
           <div className="container">
             <div className="mt-5">
               {relatedVideos && relatedVideos.length > 0 ? <h2 className="font-bold">Related Videos</h2> : null}
-              <Grid container spacing={3}>
+              <Grid container spacing={2} className="pb-16">
                 {relatedVideos && relatedVideos.map((relVid) => (
                   <Grid item xs={6}>
                     <VideoThumbnail 

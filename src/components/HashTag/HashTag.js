@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 const HashTag = ({ rawTags = [] }) => {
   const tags = useSelector((state) => state.tags.tags);
+  console.log("These are raw tags", rawTags);
 
   const getTagNames  = () => {
     let transformedTags = []
