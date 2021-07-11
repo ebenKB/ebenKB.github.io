@@ -35,7 +35,7 @@ const ArticleDetails = () => {
             )}
           />
           <div className={`${styles.content}`}>
-            <HashTag tags={["#tag1", "#tag2"]} />
+            {/* <HashTag tags={["#tag1", "#tag2"]} /> */}
             <div dangerouslySetInnerHTML={{__html: article.acf.content}} />
           </div>
         </>

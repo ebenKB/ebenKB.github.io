@@ -13,6 +13,7 @@ const EventDetails = props => {
   const events = useSelector((state) => state.events.data);
   const upcomingEvents = events.filter((event) => event.id != id);
   const event = events.find((event) => event.id == id);
+  const tags = useSelector((state) => state.tags.tags);
 
   const transformEvents = (events) => {
     return events.map((event) => ({
@@ -21,6 +22,19 @@ const EventDetails = props => {
       id: event.id
     }))
   }
+
+  // const getTagNames  = () => {
+  //   let transformedTags = []
+  //   if (event.tags.length > 0) {
+  //     for (const tag of event.tags) {
+  //       console.log("Tag data", tag, tags)
+  //       const foundTag = tags.find((x) => x.id == tag);
+  //       console.log("Found tag", foundTag)
+  //       transformedTags = [...transformedTags, foundTag.name]
+  //     }
+  //   }
+  //   return transformedTags;
+  // };
 
   return (
     <div>
@@ -39,7 +53,7 @@ const EventDetails = props => {
         {/* <h3 className="font-bold mt-5">Pictures from Asafoatse Palace</h3> */}
         <p dangerouslySetInnerHTML={{__html: event.acf.content}}  className="mt-5" />
         <div className="mt-2 pb-12">
-          <HashTag tags={["#tag1", "#tag2"]} />
+          <HashTag rawTags={event.tags} />
         </div>
         {transformEvents.length > 0 && (
           <>

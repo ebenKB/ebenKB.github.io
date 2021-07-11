@@ -8,13 +8,6 @@ import Map from "../../components/GoogleMap/GoogleMap";
 const PlaceDetails = (props) => {
   const { id } = useParams();
   const place = useSelector((state) => state.places.data.find((p) => p.id == id));
-  const defaultProps = {
-    center: {
-      lat: 59.95,
-      lng: 30.33
-    },
-    zoom: 11
-  };
 
   return (
     <div>
