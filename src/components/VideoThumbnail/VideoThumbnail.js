@@ -24,7 +24,7 @@ const VideoThumbnail = ({ path="articles", size, dataId, curve = false, embed_ca
         >
           {/* <img src={imageUrl} alt="" className={`${curve ? styles.curve : ""}`} /> */}
           <div className={styles.embedCaption}>
-            <h3>{embed_caption}</h3>
+            <h3 dangerouslySetInnerHTML={{__html: embed_caption}} />
           </div>
         </div>
         {type !== "image" && (
@@ -34,7 +34,7 @@ const VideoThumbnail = ({ path="articles", size, dataId, curve = false, embed_ca
         )}
       </div>
       { caption !== "" && (
-        <p className={`${styles.caption}`}> {caption} </p>
+        <p className={`${styles.caption}`} dangerouslySetInnerHTML={{__html: caption}} />
       )}
     </Link>
   )

@@ -12,7 +12,7 @@ const HorizontalScrollList = ({ items= [{
     <div className={`${styles.hScrollWrapper} flex`}>
       {items.map((item) => (
         <div className={`flex-1 ${styles.itemWrapper}`}>
-          <Link to={`/${path}/${item.id}`}>
+          <Link to={`/${path}/${item.id}`} className="App-link">
             <div className={styles.item}><img src={item.imageUrl} alt="" className="" /></div>
             <div className={styles.caption}>{item.caption}</div>
           </Link>

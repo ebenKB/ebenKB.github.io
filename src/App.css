@@ -14,3 +14,13 @@
 .App-link {
   color: var(--black);
 }
+
+
+.story-item_wrapper .item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.wrapper {
+  width: 100%;
+  position: relative;
+}

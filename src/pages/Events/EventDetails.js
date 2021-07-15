@@ -46,9 +46,11 @@ const EventDetails = props => {
           <span>&nbsp;{event.acf.time_of_event}</span>
         </p>
       </div>
-      <div className="bg-gray-300">
-        <Map  location={event.acf.location }/>
-      </div>
+        {event.acf.location && (
+          <div className="bg-gray-300">
+            <Map  location={event.acf.location }/>
+          </div>
+        )}
       <div className="container mt-5">
         {/* <h3 className="font-bold mt-5">Pictures from Asafoatse Palace</h3> */}
         <p dangerouslySetInnerHTML={{__html: event.acf.content}}  className="mt-5" />
