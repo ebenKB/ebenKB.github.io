@@ -39,6 +39,7 @@ const LatestVideos = props => {
               id={latestVideo.id} 
               imageUrl={latestVideo.acf.thumbnail} 
               title={getTrimmedText(latestVideo.title.rendered)}
+              path="videos"
             />
           </div>
         )}

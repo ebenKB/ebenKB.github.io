@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import VideoThumbnail from "../VideoThumbnail/VideoThumbnail";
 import styles from "./style.module.css";
 
-const StoryItem = ({ id, imageUrl, type, title }) => {
+const StoryItem = ({ id, imageUrl, type, title, path="articles" }) => {
   return (
     <div className={`${styles.wrapper}`}>
         <>        
@@ -14,6 +14,7 @@ const StoryItem = ({ id, imageUrl, type, title }) => {
               dataId={id} 
               imageUrl={imageUrl}
               type={type}
+              path={path}
               // dataId={story.id} 
               // imageUrl={story._embedded["wp:featuredmedia"] && story._embedded["wp:featuredmedia"][0].source_url} 
               // type={story._embedded["wp:featuredmedia"] && story._embedded["wp:featuredmedia"][0].media_type}
