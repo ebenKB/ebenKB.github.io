@@ -8,6 +8,7 @@ import videoReducer from "./features/videos/videosSlice";
 import placesReducer from './features/places/placesSlice';
 import tagsReducer from "./features/tags/tagsSlice";
 import regionsReducer from "./features/regions/regionsSlice";
+import featuredContentsReducer  from "./features/featuredContents/featuredContentsSlice";
 import thunk from 'redux-thunk'
 
 
@@ -31,7 +32,8 @@ const rootReducer = combineReducers({
   videos: videoReducer,
   places: placesReducer,
   tags: tagsReducer,
-  regions: regionsReducer
+  regions: regionsReducer,
+  featuredContent: featuredContentsReducer,
 })
 
 const persistConfig = {

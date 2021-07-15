@@ -10,24 +10,37 @@ import { addTags } from '../../features/tags/tagsSlice';
 import { Link } from "react-router-dom";
 import Loader from '../Loader/Loader';
 import { getTrimmedText } from '../../utils/app';
+import { addFeaturedContent } from '../../features/featuredContents/featuredContentsSlice';
 
 const CarouselWrapper = (props) => {
   const [loading, setLoading] = useState(false);
   const carousel = React.createRef();
   const dispatch = useDispatch();
   const featuredTag = useSelector((state) => state.tags.tags.find((tag) => tag.slug === "featured"));
-  const [featuredArticles, setFeaturedArticles] = useState(null);
-
+  const featuredArticles = useSelector((state) => state.featuredContent.featuredArticles);
+  
   const getTags = async () => {
-    setLoading(true);
-    const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/tags`)
-    dispatch(addTags(res.data));
+    try {
+      setLoading(true);
+      const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/tags`)
+      dispatch(addTags(res.data));
+    } catch (error) {
+      setLoading(false);
+    }
   }
 
   const getFeaturedArticles = async () => {
-    if (featuredTag) {
-      const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/articles?_embed&per_page=5&tags[]=${featuredTag.id}`);
-      setFeaturedArticles(res.data);
+    setLoading(true);
+    try {
+      if (featuredTag) {
+        const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/articles?_embed&per_page=5&tags[]=${featuredTag.id}`);
+        dispatch(addFeaturedContent({
+          name: "featuredArticles",
+          data: res.data
+        }))
+        setLoading(false);
+      }
+    } catch (error) {
       setLoading(false);
     }
   }
@@ -39,10 +52,6 @@ const CarouselWrapper = (props) => {
   useEffect(() => {
     getFeaturedArticles();
   }, [featuredTag])
-
-  const onChange = () => {
-    console.log("This is a slider")
-  }
 
   const contentStyle = {
     height: '180px',
@@ -62,7 +71,7 @@ const CarouselWrapper = (props) => {
             <div className="item navRight" onClick={() => carousel.current.next()}><RightCircleOutlined /></div>
           </div>
           <Carousel
-            afterChange={onChange}
+            // afterChange={onChange}
             autoplay={false}
             dotPosition="bottom"
             arrows={false} 
@@ -85,7 +94,6 @@ const CarouselWrapper = (props) => {
                 </div>
               </div>
             ))}
-            {/* <h3 style={contentStyle}>1</h3> */}
           </Carousel>
         </>
       )}
