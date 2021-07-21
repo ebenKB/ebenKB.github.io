@@ -29,6 +29,7 @@ const LatestUpdate = (props) => {
   return (
     <div className="text-xs wrapper">
       <h3 style={{marginBottom: "8px"}} className="text-gray-700 font-bold">Latest Updates</h3>
+      {latestArticle && (
       <div className="story-item_wrapper">
         <div className="item">
           <StoryItem
@@ -39,6 +40,7 @@ const LatestUpdate = (props) => {
           />
         </div>
       </div>
+      )}
       <Divider style={{marginBottom: "20px"}}/>
       {loading && <Loader />}
         <Grid container spacing={2}>
