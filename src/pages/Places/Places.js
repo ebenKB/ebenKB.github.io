@@ -35,7 +35,7 @@ const Places = (props) => {
         <SearchInput />
       </div> */}
       {places.map((place) => (
-        <div style={{marginBottom: '12px'}}>
+        <div style={{marginBottom: '12px'}} key={place.id}>
           <PlacesItem place={place} />
         </div>
       ))}
