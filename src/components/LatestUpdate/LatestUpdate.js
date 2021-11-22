@@ -19,7 +19,7 @@ const LatestUpdate = (props) => {
   const getLatestUpdate = async () => {
     setLoading(true);
     const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/articles?_embed&per_page=5`);
-    dispatch(addArticles(res.data))
+    // dispatch(addArticles(res.data))
     setLoading(false);
   }
 

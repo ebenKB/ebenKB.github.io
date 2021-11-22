@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -7,10 +7,6 @@ import store from './store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 // import * as serviceWorker from './serviceWorker';
-import ReactGA from 'react-ga';
-const TRACKING_ID = "G-EN1H4SFBYF";
-ReactGA.initialize(TRACKING_ID);
-ReactGA.pageview(window.location.pathname + window.location.search);
 
 let persistor = persistStore(store);
 

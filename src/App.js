@@ -20,6 +20,7 @@ import { addCategories } from "./features/categories/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
 import RouteChangeTracker from "./components/RouteChangeTracker/RouteChangeTracker";
+import ReactGA from 'react-ga';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,12 @@ export default function App() {
         dispatch(addCategories(res.data));
       })
     }
+  }, []);
+
+  useEffect(() => {
+    const TRACKING_ID = "G-EN1H4SFBYF";
+    ReactGA.initialize(TRACKING_ID);
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
 
   return (
