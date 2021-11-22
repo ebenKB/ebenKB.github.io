@@ -8,6 +8,8 @@ import { addPlaces } from '../../features/places/placesSlice';
 import axios from 'axios';
 import { CircularProgress } from '@material-ui/core';
 import Loader from '../../components/Loader/Loader';
+import ReactGA from "react-ga4";
+import { Helmet} from "react-helmet";
 
 const Places = (props) => {
   const [loading, setLoading] = useState(false);
@@ -24,22 +26,35 @@ const Places = (props) => {
   }
 
   useEffect(() => {
+    ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
+  }, []);
+
+  useEffect(() => {
     getPlaces();
   }, [category]);
 
   return (
-    <div className={`${styles.wrapper}`}>
-      <h3>Places</h3>
-      {loading && <Loader />}
-      {/* <div className="mb-5">
-        <SearchInput />
-      </div> */}
-      {places.map((place) => (
-        <div style={{marginBottom: '12px'}} key={place.id}>
-          <PlacesItem place={place} />
-        </div>
-      ))}
-    </div>
+    <>
+      <Helmet>
+        <title>MTN Herritage App | Places</title>
+        <meta name="title" content="MTN Heritage App Places" />
+        <meta name="description" content="MTN Heritage app Places" />
+        <meta name="keywords" content="MTN Heritage, MTN app, Heritage places, Heritage place, app place, app places,  heritage app" />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+      <div className={`${styles.wrapper}`}>
+        <h3>Places</h3>
+        {loading && <Loader />}
+        {/* <div className="mb-5">
+          <SearchInput />
+        </div> */}
+        {places.map((place) => (
+          <div style={{marginBottom: '12px'}} key={place.id}>
+            <PlacesItem place={place} />
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 

@@ -7,6 +7,8 @@ import { addVidoes } from '../../features/videos/videosSlice';
 import axios from 'axios';
 import Loader from '../../components/Loader/Loader';
 import { getTrimmedText } from '../../utils/app';
+import ReactGA from "react-ga4";
+import {Helmet} from "react-helmet";
 
 const VideoTrends = () => {
   // const category = useSelector((state) =>
@@ -27,6 +29,10 @@ const VideoTrends = () => {
   }
 
   useEffect(() => {
+    ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
+  }, []);
+
+  useEffect(() => {
     getVideos();
   }, []);
 
@@ -37,35 +43,44 @@ const VideoTrends = () => {
   }, [videos]);
 
   return (
-    <div className={`${styles.wrapper}`}>
-      <h3>Trending Videos</h3>
-      {loading && <Loader />}
-      {recentVideo && (
-        <VideoThumbnail 
-          size="big"
-          imageUrl={recentVideo.acf.thumbnail}
-          dataId={recentVideo.id}
-          path="videos"
-          embed_caption={getTrimmedText(recentVideo.title.rendered)}
-        />
-      )}
-      <div className={`${styles.thumbnails}`}>
-        <Grid container spacing={2} >
-          {allVideos && allVideos.map((video) => (
-            <Grid item md={6} xs={6} className={`${styles.item}`}>
-              <VideoThumbnail 
-                size="small"
-                caption={video.title.rendered}
-                curve={true}
-                dataId={video.id}
-                imageUrl={video.acf.thumbnail}
-                path="videos"
-              />
-            </Grid>
-          ))}
-        </Grid>
+    <>
+      <Helmet>
+        <title>MTN Herritage App | Videos</title>
+        <meta name="title" content="MTN Heritage App Videos" />
+        <meta name="description" content="MTN Heritage app Videos" />
+        <meta name="keywords" content="MTN Heritage, MTN app, Heritage videos, heritage app" />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+      <div className={`${styles.wrapper}`}>
+        <h3>Trending Videos</h3>
+        {loading && <Loader />}
+        {recentVideo && (
+          <VideoThumbnail 
+            size="big"
+            imageUrl={recentVideo.acf.thumbnail}
+            dataId={recentVideo.id}
+            path="videos"
+            embed_caption={getTrimmedText(recentVideo.title.rendered)}
+          />
+        )}
+        <div className={`${styles.thumbnails}`}>
+          <Grid container spacing={2} >
+            {allVideos && allVideos.map((video) => (
+              <Grid item md={6} xs={6} className={`${styles.item}`}>
+                <VideoThumbnail 
+                  size="small"
+                  caption={video.title.rendered}
+                  curve={true}
+                  dataId={video.id}
+                  imageUrl={video.acf.thumbnail}
+                  path="videos"
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
