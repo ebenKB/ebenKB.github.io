@@ -19,6 +19,7 @@ import PlaceDetails from "./pages/Places/PlaceDetails";
 import { addCategories } from "./features/categories/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
+import RouteChangeTracker from "./components/RouteChangeTracker/RouteChangeTracker";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ export default function App() {
         </Route>
       </Switch>
       <Nav />
+      <RouteChangeTracker />
     </Router>
   );
 }
