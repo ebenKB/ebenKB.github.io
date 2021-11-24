@@ -10,6 +10,7 @@ import { CircularProgress } from '@material-ui/core';
 import Loader from '../../components/Loader/Loader';
 import ReactGA from "react-ga4";
 import { Helmet} from "react-helmet";
+import PageHeader from "../../components/PageHeader/PageHeader"
 
 const Places = (props) => {
   const [loading, setLoading] = useState(false);
@@ -42,8 +43,8 @@ const Places = (props) => {
         <meta name="keywords" content="MTN Heritage, MTN app, Heritage places, Heritage place, app place, app places,  heritage app" />
         <meta name="robots" content="index, follow" />
       </Helmet>
+      <PageHeader render={() => <h3>Places</h3>} />
       <div className={`${styles.wrapper}`}>
-        <h3>Places</h3>
         {loading && <Loader />}
         {/* <div className="mb-5">
           <SearchInput />

@@ -12,3 +12,10 @@
   margin: auto;
   margin-top: 10px;
 }
+
+.carousel_title {
+  background-color: var(--offWhite);
+  padding: 8px 16px;
+  font-weight: bold;
+  font-size: 1.05rem;
+}

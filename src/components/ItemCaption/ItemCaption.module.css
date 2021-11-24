@@ -1,0 +1,7 @@
+.wrapper {
+  background-color: var(--dark);
+  color: rgb(204, 204, 204);
+  padding: 8px 16px;
+  font-weight: 300;
+  text-align: center;
+}

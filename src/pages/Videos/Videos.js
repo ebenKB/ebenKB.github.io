@@ -9,6 +9,7 @@ import Loader from '../../components/Loader/Loader';
 import { getTrimmedText } from '../../utils/app';
 import ReactGA from "react-ga4";
 import {Helmet} from "react-helmet";
+import PageHeader from "../../components/PageHeader/PageHeader"
 
 const VideoTrends = () => {
   // const category = useSelector((state) =>
@@ -52,7 +53,9 @@ const VideoTrends = () => {
         <meta name="robots" content="index, follow" />
       </Helmet>
       <div className={`${styles.wrapper}`}>
-        <h3>Trending Videos</h3>
+        <PageHeader render={() => (
+          <h3>Latest Videos</h3>
+        )} />
         {loading && <Loader />}
         {recentVideo && (
           <VideoThumbnail 
@@ -60,17 +63,20 @@ const VideoTrends = () => {
             imageUrl={recentVideo.acf.thumbnail}
             dataId={recentVideo.slug}
             path="videos"
-            embed_caption={getTrimmedText(recentVideo.title.rendered)}
+            // embed_caption={getTrimmedText(recentVideo.title.rendered)}
+            embed_caption=""
+            curve={false}
           />
         )}
+        {recentVideo && <div className={styles.carousel_title} dangerouslySetInnerHTML={{__html: getTrimmedText(recentVideo.title.rendered)}} />}
         <div className={`${styles.thumbnails}`}>
           <Grid container spacing={2} >
             {allVideos && allVideos.map((video) => (
-              <Grid item md={6} xs={6} className={`${styles.item}`}>
+              <Grid item md={12} xs={12} className={`${styles.item}`}>
                 <VideoThumbnail 
                   size="small"
                   caption={video.title.rendered}
-                  curve={true}
+                  curve={false}
                   dataId={video.slug}
                   imageUrl={video.acf.thumbnail}
                   path="videos"

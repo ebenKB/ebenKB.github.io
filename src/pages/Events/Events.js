@@ -9,6 +9,7 @@ import { addEvents } from "../../features/events/eventsSlice";
 import Loader from '../../components/Loader/Loader';
 import ReactGA from "react-ga4";
 import { Helmet } from "react-helmet";
+import PageHeader from '../../components/PageHeader/PageHeader';
 
 const Events = props => {
   const [loading, setLoading] = useState(false);
@@ -53,8 +54,12 @@ const Events = props => {
         <meta name="keywords" content="MTN Heritage, MTN app, Heritage events, heritage app" />
         <meta name="robots" content="index, follow" />
       </Helmet>
+      <PageHeader render={() => (
+        <h3>Upcoming Events</h3>
+        )}
+      />
       <div className={styles.wrapper}>
-        <h3 className="text-center mt-5 font-bold">Upcoming Events</h3>
+        {/* <h3 className="text-center mt-5 font-bold">Upcoming Events</h3> */}
         <FormControl  fullWidth variant="outlined" className={styles.formControl}>
           <InputLabel id="demo-simple-select-outlined-label">Filter Events by:</InputLabel>
           <Select

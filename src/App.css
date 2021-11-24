@@ -1,9 +1,11 @@
 @tailwind utilities;
 :root {
   --lightGrey: rgb(197, 197, 197);
+  --offWhite: rgb(243, 243, 243);
   --yellow: #FBCC27;
   --black: #000;
-  --white: rgb(223, 223, 223);
+  --white: rgb(37, 37, 37);
+  --dark : rgb(31, 31, 31);
 }
 
 .container {

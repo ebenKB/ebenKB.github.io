@@ -12,6 +12,7 @@ import Loader from '../../components/Loader/Loader';
 import { getTrimmedText} from "../../utils/app";
 import ReactGA from "react-ga4";
 import {Helmet} from "react-helmet"
+import PageHeader from "../../components/PageHeader/PageHeader"
 
 const Articles = (props) => {
   const [loading, setLoading] = useState(false);
@@ -46,7 +47,9 @@ const Articles = (props) => {
         <meta name="robots" content="index, follow" />
       </Helmet>
       <div>
-        <h3>Trending articles</h3>
+        <PageHeader render={() => (
+          <h3>Trending articles</h3>
+        )} />
         {loading && <Loader />}
         {latestArticle && <Link to={`/articles/${latestArticle.slug}`}>
           <ImageWithText

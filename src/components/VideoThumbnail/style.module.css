@@ -1,5 +1,5 @@
 .thumbnailWrapper {
-  border-radius: 8px;
+  /* border-radius: 8px; */
   background-color:gray;
   position: relative;
   color: var(--black);
@@ -26,7 +26,7 @@
   height: 100%;
 }
 
-.thumbnail .curve {
+.curve {
   border-radius: 8px;
 }
 
