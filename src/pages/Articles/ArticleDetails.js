@@ -5,19 +5,20 @@ import HashTag from "../../components/HashTag/HashTag";
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Axios from 'axios';
-import { getTrimmedText } from "../../utils/app";
+import { getTrimmedText, scrollToTop } from "../../utils/app";
 import { Grid } from '@material-ui/core';
 
-
 const ArticleDetails = () => {
-  const { id } = useParams();
-  let article = useSelector((state) => state.articles.data.find((article) => article.id == id));
+  const { slug } = useParams();
+  let article = useSelector((state) => state.articles.data.find((article) => article.slug === slug));
   const [relatedArticles, setRelatedArticles] = useState([]);
   const [currentArticle, setCurrentArticle] = useState(article);
 
   const getArticleByID = async () => {
-    const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/articles/${id}?_embed`);
-    setCurrentArticle(res.data);
+    if (article) {
+      const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/articles/${article.id}?_embed`);
+      setCurrentArticle(res.data);
+    }
   }
 
   const getRelatedArticles = async () => {
@@ -29,11 +30,12 @@ const ArticleDetails = () => {
 
   useEffect(() => {
     getArticleByID();
-  }, [])
+    scrollToTop();
+  }, [slug])
 
   useEffect(() => {
     getRelatedArticles();
-  }, [currentArticle]);
+  }, [currentArticle, slug]);
 
   return (
     <div className={`${styles.detailsWrapper} font-bold`}>
@@ -48,7 +50,7 @@ const ArticleDetails = () => {
               <span dangerouslySetInnerHTML={{__html: currentArticle._embedded['wp:featuredmedia'] !== undefined ? currentArticle._embedded['wp:featuredmedia'][0].caption.rendered : null}} />
             )}
           />
-          <div className={`${styles.content}`}>
+          <div className={`${styles.content} text-justify`}>
             <HashTag rawTags={currentArticle.tags} />
             <div dangerouslySetInnerHTML={{__html: currentArticle.acf.content}} />
           </div>
@@ -60,7 +62,7 @@ const ArticleDetails = () => {
           <Grid container spacing={2} style={{paddingBottom: "60px"}}>
             {relatedArticles.map((relArticle) => (
               <Grid item sm={6} xs={6}>
-                <Link to={`/articles/${relArticle.id}`} className="App-link">
+                <Link to={`/articles/${relArticle.slug}`} className="App-link">
                   <ImageCaption
                     imageUrl={relArticle._embedded['wp:featuredmedia'] && relArticle._embedded['wp:featuredmedia'][0].source_url} 
                     fixed

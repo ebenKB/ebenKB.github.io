@@ -5,3 +5,7 @@ export const getTrimmedText = (text) => {
 
   return `${text.substring(0, 40)}...`
 }
+
+export const scrollToTop = () => {
+  window.scrollTo({top: 0, behavior: "smooth"});
+}

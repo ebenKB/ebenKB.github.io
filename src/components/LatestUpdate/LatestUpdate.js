@@ -33,7 +33,7 @@ const LatestUpdate = (props) => {
       <div className="story-item_wrapper">
         <div className="item">
           <StoryItem
-            id={latestArticle.id} 
+            slug={latestArticle.slug} 
             imageUrl={latestArticle._embedded["wp:featuredmedia"] && latestArticle._embedded["wp:featuredmedia"][0].source_url} 
             type={latestArticle._embedded["wp:featuredmedia"] && latestArticle._embedded["wp:featuredmedia"][0].media_type}
             title={latestArticle.title.rendered}
@@ -46,7 +46,7 @@ const LatestUpdate = (props) => {
         <Grid container spacing={2}>
           {allRecentArticles && allRecentArticles.map((article) => (
             <Grid item xs={6}>
-              <Link to={`/articles/${article.id}`} className="App-link">
+              <Link to={`/articles/${article.slug}`} className="App-link">
                 <ImageCaption
                   imageUrl={article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url}
                   caption={getTrimmedText(article.title.rendered)}

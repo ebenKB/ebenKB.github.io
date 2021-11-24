@@ -58,7 +58,7 @@ const VideoTrends = () => {
           <VideoThumbnail 
             size="big"
             imageUrl={recentVideo.acf.thumbnail}
-            dataId={recentVideo.id}
+            dataId={recentVideo.slug}
             path="videos"
             embed_caption={getTrimmedText(recentVideo.title.rendered)}
           />
@@ -71,7 +71,7 @@ const VideoTrends = () => {
                   size="small"
                   caption={video.title.rendered}
                   curve={true}
-                  dataId={video.id}
+                  dataId={video.slug}
                   imageUrl={video.acf.thumbnail}
                   path="videos"
                 />

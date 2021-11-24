@@ -47,7 +47,7 @@ export default function App() {
         <Route path="/videos" exact>
           <Videos/>
         </Route>
-        <Route path="/videos/:id" exact>
+        <Route path="/videos/:slug" exact>
           <VideoDetails/>
         </Route>
         <Route path="/articles" exact>
@@ -56,16 +56,16 @@ export default function App() {
         <Route path="/events" exact>
           <Events />
         </Route>
-        <Route path="/events/:id" exact>
+        <Route path="/events/:slug" exact>
           <EventDetails />
         </Route>
         <Route path="/places" exact>
           <Places />
         </Route>
-        <Route path="/places/:id" exact>
+        <Route path="/places/:slug" exact>
           <PlaceDetails />
         </Route>
-        <Route path="/articles/:id/" exact>
+        <Route path="/articles/:slug/" exact>
           <ArticleDetails />
         </Route>
         <Route path="/">

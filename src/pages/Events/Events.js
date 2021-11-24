@@ -22,7 +22,6 @@ const Events = props => {
   const handleChange = (e) => {
     const { value } = e.target;
     setFilter(value);
-    console.log("Filter", value);
     const rem = events.filter((event) =>
       event.acf.region.trim().toLowerCase() === value.trim().toLowerCase());
       console.log("rem: ", rem);
@@ -44,13 +43,6 @@ const Events = props => {
   useEffect(() => {
     ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
   }, []);
-
-  // useEffect(() => {
-  //   if (filter !== "") {
-  //     const rem = filteredEvents.map((event) => event.acf.region.trim().toLocaleLowerCase() === filter.trim().toLocaleLowerCase());
-  //     setFilteredEvents(rem);
-  //   }
-  // }, [filter]);
 
   return (
     <>

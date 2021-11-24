@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // import PropTypes from 'prop-types'
 import HScroll from "../../components/HorizontalScrollList/HorizontalScrollList";
 import HashTag from "../../components/HashTag/HashTag";
@@ -6,41 +6,34 @@ import Map from "../../components/GoogleMap/GoogleMap";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { format } from "date-fns";
+import { scrollToTop } from '../../utils/app';
 
 
-const EventDetails = props => {
-  const { id } = useParams();
+const EventDetails = (props) => {
+  const { slug } = useParams();
   const events = useSelector((state) => state.events.data);
-  const upcomingEvents = events.filter((event) => event.id != id);
-  const event = events.find((event) => event.id == id);
-  const tags = useSelector((state) => state.tags.tags);
+  const upcomingEvents = events.filter((event) => event.slug !== slug);
+  const event = events.find((event) => event.slug === slug);
+  // const tags = useSelector((state) => state.tags.tags);
 
   const transformEvents = (events) => {
     return events.map((event) => ({
       imageUrl: event.acf.pictures,
       caption: event.acf.title,
-      id: event.id
+      id: event.id,
+      slug: event.slug,
     }))
   }
 
-  // const getTagNames  = () => {
-  //   let transformedTags = []
-  //   if (event.tags.length > 0) {
-  //     for (const tag of event.tags) {
-  //       console.log("Tag data", tag, tags)
-  //       const foundTag = tags.find((x) => x.id == tag);
-  //       console.log("Found tag", foundTag)
-  //       transformedTags = [...transformedTags, foundTag.name]
-  //     }
-  //   }
-  //   return transformedTags;
-  // };
+  useEffect(() => {
+    scrollToTop()
+  }, [event])
 
   return (
     <div>
       <div className="container pt-5">
         <h3 className="font-bold" dangerouslySetInnerHTML={{__html:event.acf.title}} />
-        <p>{event.acf.description}</p>
+        <p className="text-justify">{event.acf.description}</p>
         <p className="text-gray-400">
           {format(new Date(event.acf.date_of_event), "eee, do MMMM yyyy")}
           <span>&nbsp;{event.acf.time_of_event}</span>
@@ -53,7 +46,7 @@ const EventDetails = props => {
         )}
       <div className="container mt-5">
         {/* <h3 className="font-bold mt-5">Pictures from Asafoatse Palace</h3> */}
-        <p dangerouslySetInnerHTML={{__html: event.acf.content}}  className="mt-5" />
+        <p dangerouslySetInnerHTML={{__html: event.acf.content}}  className="mt-5 text-justify" />
         <div className="mt-2 pb-12">
           <HashTag rawTags={event.tags} />
         </div>
@@ -71,8 +64,6 @@ const EventDetails = props => {
   )
 }
 
-EventDetails.propTypes = {
-
-}
+EventDetails.propTypes = {}
 
 export default EventDetails

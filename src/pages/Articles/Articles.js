@@ -48,7 +48,7 @@ const Articles = (props) => {
       <div>
         <h3>Trending articles</h3>
         {loading && <Loader />}
-        {latestArticle && <Link to={`/articles/${latestArticle.id}`}>
+        {latestArticle && <Link to={`/articles/${latestArticle.slug}`}>
           <ImageWithText
             imageUrl={latestArticle._embedded['wp:featuredmedia'][0].source_url}
             caption={getTrimmedText(latestArticle.title.rendered)}
@@ -59,7 +59,7 @@ const Articles = (props) => {
           <Grid container spacing={3} classes={{root: styles.content}} >
               {allArticles.map((article) => (
                 <Grid item xs={6}>
-                  <Link to={`/articles/${article.id}`}>
+                  <Link to={`/articles/${article.slug}`}>
                     <ImageCaption  
                       imageUrl={article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url}
                       caption={getTrimmedText(article.title.rendered)}

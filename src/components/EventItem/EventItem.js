@@ -16,18 +16,18 @@ const EventItem = ({ event }) => {
         </Grid>
         <Grid item xs={6}>
           <div className="font-bold">
-            <Link to={`/events/${event.id}`} className="App-link">{event.acf.title}</Link>
+            <Link to={`/events/${event.slug}`} className="App-link">{event.acf.title}</Link>
           </div>
           <div className={`${styles.iconCaption} ${styles.faint}`}>
             <LocationOnIcon />
             <div className="">{event.acf.region}</div>
           </div>
           <div>
-            <Link to={`/events/${event.id}`} className="">More Info</Link>
+            <Link to={`/events/${event.slug}`} className="">More Info</Link>
           </div>
         </Grid>
         <Grid item xs={3}>
-          <Link to={`/events/${event.id}`} className="App-link">
+          <Link to={`/events/${event.slug}`} className="App-link">
             <img src={event.acf.pictures} alt="" 
               className="w-full"
             />

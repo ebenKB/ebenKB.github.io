@@ -7,10 +7,11 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 import YoutubeEmbed from '../../components/YoutubeEmbed.js/YoutubeEmbed';
+import { scrollToTop } from '../../utils/app';
 
 const VideoDetails = () => {
-  const { id } = useParams();
-  const video = useSelector(state => state.videos.data.find((vid) => vid.id == id));
+  const { slug } = useParams();
+  const video = useSelector(state => state.videos.data.find((vid) => vid.slug === slug));
   const [relatedVideos, setRelatedVideos] = useState([])
   useEffect(() => {
     getRelatedVideos();
@@ -20,11 +21,15 @@ const VideoDetails = () => {
     if (video) {
       const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/videos?per_page=10&categories[]=${video.categories}`);
       
-      const otherVidoes = res.data.filter((vid) => vid.id != id);
+      const otherVidoes = res.data.filter((vid) => vid.id != video.id);
       setRelatedVideos(otherVidoes);
     }
   }
 
+  useEffect(() => {
+    scrollToTop()
+  }, [video])
+  
   return (
     <div>
       <div className="container pt-5">
@@ -49,7 +54,7 @@ const VideoDetails = () => {
                       caption={relVid.title.rendered}
                       imageUrl={relVid.acf.thumbnail}
                       curve
-                      dataId={relVid.id}
+                      dataId={relVid.slug}
                       path="videos"
                       type="video"
                     />

@@ -4,14 +4,14 @@ import { Grid } from '@material-ui/core';
 import VideoThumbnail from "../VideoThumbnail/VideoThumbnail";
 import styles from "./style.module.css";
 
-const StoryItem = ({ id, imageUrl, type, title, path="articles" }) => {
+const StoryItem = ({ slug, imageUrl, type, title, path="articles" }) => {
   return (
     <div className={`${styles.wrapper}`}>
         <>        
         <Grid container style={{width: '100%'}}>
           <Grid md={12} item style={{width: "100%"}}>
             <VideoThumbnail 
-              dataId={id} 
+              dataId={slug} 
               imageUrl={imageUrl}
               type={type}
               path={path}

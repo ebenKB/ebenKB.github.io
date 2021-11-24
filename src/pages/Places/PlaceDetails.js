@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import Map from "../../components/GoogleMap/GoogleMap";
 
 const PlaceDetails = (props) => {
-  const { id } = useParams();
-  const place = useSelector((state) => state.places.data.find((p) => p.id == id));
+  const { slug } = useParams();
+  const place = useSelector((state) => state.places.data.find((p) => p.slug === slug));
 
   return (
     <div>
@@ -16,7 +16,7 @@ const PlaceDetails = (props) => {
           <div className="container pt-5">
             <h3 className="font-bold">{place.acf.title}</h3>
             <img src={place.acf.file} alt="" className="w-full" />
-            <p>{place.acf.description}</p>
+            <p className="text-justify">{place.acf.description}</p>
           </div>
           <div className="bg-gray-200 mb-5">
             <Map  location={place.acf.map }/>
@@ -24,7 +24,7 @@ const PlaceDetails = (props) => {
           {/* <div className="mt-5 mb-5">
             <HScrollList />
           </div> */}
-          <div className="container pt-5">
+          <div className="container pt-5 pb-10 text-justify">
             <p>{place.acf.content}</p>
           </div>
         </>

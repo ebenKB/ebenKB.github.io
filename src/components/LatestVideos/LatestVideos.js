@@ -10,7 +10,7 @@ import VideoThumbnail from '../VideoThumbnail/VideoThumbnail';
 import Loader from "../Loader/Loader";
 import { Link } from "react-router-dom";
 
-const LatestVideos = props => {
+const LatestVideos = (props) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const videos = useSelector((state) => state.videos.data);
@@ -25,7 +25,6 @@ const LatestVideos = props => {
 
   useEffect(() => {
     getLatestVideos();
-
   }, [])
 
   return (
@@ -36,7 +35,7 @@ const LatestVideos = props => {
         {latestVideo && (
           <div className="item">
             <StoryItem 
-              id={latestVideo.id} 
+              slug={latestVideo.slug} 
               imageUrl={latestVideo.acf.thumbnail} 
               title={getTrimmedText(latestVideo.title.rendered)}
               path="videos"
@@ -49,12 +48,12 @@ const LatestVideos = props => {
         <Grid container spacing={2}>
           {otherRecentVideos && otherRecentVideos.map((video) => (
             <Grid item xs={6}>
-              <Link to={`/videos/${video.id}`} className="App-link">
+              <Link to={`/videos/${video.slug}`} className="App-link">
                 <VideoThumbnail
                   size="small"
                   caption={video.title.rendered}
                   curve={true}
-                  dataId={video.id}
+                  dataId={video.slug}
                   imageUrl={video.acf.thumbnail}
                   path="videos"
                 />
@@ -66,8 +65,6 @@ const LatestVideos = props => {
   )
 }
 
-LatestVideos.propTypes = {
-
-}
+LatestVideos.propTypes = {}
 
 export default LatestVideos

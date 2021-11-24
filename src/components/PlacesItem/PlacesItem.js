@@ -13,20 +13,20 @@ const PlacesItem = ({ place }) => {
       { place && (
         <>
           <Grid item xs={3} classes={{root: styles.imgWrapper}}>
-            <Link to={`/places/${place.id}`}>
+            <Link to={`/places/${place.slug}`}>
               <img src={place.acf.file} alt=""/>
             </Link>
           </Grid>
             <Grid item xs={8}>
               <div className={styles.caption}>
               <h3>
-                <Link to={`/places/${place.id}`}>
+                <Link to={`/places/${place.slug}`}>
                   {place.acf.title}
                 </Link>
               </h3>
               <p>{`${place.acf.description.substring(0, 80)}...`}</p>
               </div>
-              <Link to={`/places/${place.id}`}>More Info.</Link>
+              <Link to={`/places/${place.slug}`}>More Info.</Link>
               <HashTag tags={["#Ayigbe Road"]} />
             </Grid>
           <Grid item xs={1} style={{marginLeft: "auto"}}>
