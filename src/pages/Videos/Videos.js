@@ -10,6 +10,10 @@ import { getTrimmedText } from '../../utils/app';
 import ReactGA from "react-ga4";
 import {Helmet} from "react-helmet";
 import PageHeader from "../../components/PageHeader/PageHeader"
+import FixedLoader from '../../components/FixedLoader/FixedLoader';
+import { THEME } from '../../utils/constants';
+import HeroText from '../../components/HeroText/HeroText';
+import { formatDistance } from 'date-fns';
 
 const VideoTrends = () => {
   // const category = useSelector((state) =>
@@ -29,9 +33,9 @@ const VideoTrends = () => {
     setLoading(false);
   }
 
-  useEffect(() => {
-    ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
-  }, []);
+  // useEffect(() => {
+  //   ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
+  // }, []);
 
   useEffect(() => {
     getVideos();
@@ -40,6 +44,7 @@ const VideoTrends = () => {
   useEffect(() => {
     const [recent, ...rest] = videos;
     setRecentVideo(recent);
+    console.log("REcent video ", recent)
     setAllVideos(rest)
   }, [videos]);
 
@@ -56,7 +61,7 @@ const VideoTrends = () => {
         <PageHeader render={() => (
           <h3>Latest Videos</h3>
         )} />
-        {loading && <Loader />}
+        {loading && <FixedLoader />}
         {recentVideo && (
           <VideoThumbnail 
             size="big"
@@ -68,18 +73,25 @@ const VideoTrends = () => {
             curve={false}
           />
         )}
-        {recentVideo && <div className={styles.carousel_title} dangerouslySetInnerHTML={{__html: getTrimmedText(recentVideo.title.rendered)}} />}
+        {/* {recentVideo && <div className={styles.carousel_title} dangerouslySetInnerHTML={{__html: getTrimmedText(recentVideo.title.rendered)}} />} */}
+        {recentVideo && (
+          <HeroText 
+            text={getTrimmedText(recentVideo.title.rendered, 100)} 
+            caption={`Published ${formatDistance(new Date(recentVideo.date), new Date())} ago`} 
+          />
+        )}
         <div className={`${styles.thumbnails}`}>
-          <Grid container spacing={2} >
+          <Grid container spacing={2}>
             {allVideos && allVideos.map((video) => (
               <Grid item md={12} xs={12} className={`${styles.item}`}>
-                <VideoThumbnail 
-                  size="small"
+                <VideoThumbnail
+                  size="big"
                   caption={video.title.rendered}
                   curve={false}
                   dataId={video.slug}
                   imageUrl={video.acf.thumbnail}
                   path="videos"
+                  theme={THEME.DARK}
                 />
               </Grid>
             ))}

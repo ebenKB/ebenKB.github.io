@@ -51,7 +51,7 @@ const LatestVideos = (props) => {
               <Link to={`/videos/${video.slug}`} className="App-link">
                 <VideoThumbnail
                   size="small"
-                  caption={video.title.rendered}
+                  caption={getTrimmedText(video.title.rendered, 20)}
                   curve={true}
                   dataId={video.slug}
                   imageUrl={video.acf.thumbnail}

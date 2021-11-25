@@ -1,16 +1,16 @@
 .carousel_wrapper {
   width: 100%;
-  height: 220px;
+  /* height: 240px; */
   position: relative;
+  /* margin-bottom: 50px; */
 }
 
-.carousel_title {
-  position: absolute;
-  bottom: 10px;
+/* .carousel_title {
+  position: relative;
   color: var(--white);
-  /* width: 300px; */
   width: 100%;
-}
+  font-size: 1.05rem;
+} */
 
 .carousel_content {
   position: relative;
@@ -18,19 +18,14 @@
 
 .carousel_title p {
   font-weight: 600;
-  width: 90%;
+  width: 100%;
   margin: auto;
-  position: absolute;
-  left: 20px;
-  bottom: -10px;
+  left: 0px;
   text-align: center;
   color: var(--white);
-  background: rgba(100, 100, 100, 0.5);
+  background: var(--offWhite);
   padding: 8px;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
 }
-
 
 .carousel_wrapper .controls {
   position: relative;
@@ -52,10 +47,11 @@
   right: 20px;
 }
 
-
 /* Override ant design classes */
 .carousel_wrapper .ant-carousel .slick-dots-bottom {
-  bottom: -30px;
+  /* bottom: -30px; */
+  position: absolute;
+  bottom: -10px;
 }
 
 .ant-carousel .slick-prev,
@@ -73,7 +69,6 @@
   border-radius: 100%;
 }
 
-
 .carousel_wrapper .ant-carousel .slick-dots li.slick-active { 
   width: 8px;
   height: 8px;
@@ -84,10 +79,7 @@
   display: inline-flex;
 }
 
-/* .ant-carousel .slick-prev,
-.ant-carousel .slick-next,
-.ant-carousel .slick-prev:hover,
-.ant-carousel .slick-next:hover {
-  font-size: inherit;
-  color: currentColor;
-} */
+.carousel_wrapper .ant-carousel .slick-dots li.slick-active {
+  /* border: 1px solid white;
+  box-shadow: 5px 5px 8px rgb(240, 240, 240); */
+}

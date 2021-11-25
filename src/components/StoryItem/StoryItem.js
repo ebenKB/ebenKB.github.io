@@ -22,7 +22,7 @@ const StoryItem = ({ slug, imageUrl, type, title, path="articles" }) => {
           </Grid>
         </Grid>
         <Grid className="mt-2">
-          <p dangerouslySetInnerHTML={{__html: title }} />
+          <p className="font-bold" dangerouslySetInnerHTML={{__html: title }} />
         </Grid>
         </>
     </div>

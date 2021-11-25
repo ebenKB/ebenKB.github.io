@@ -36,7 +36,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const MEASUREMENT_ID = "G-EN1H4SFBYF";
+    const MEASUREMENT_ID = "G-HD88BWH18Y" /*"G-EN1H4SFBYF"*/;
     ReactGA.initialize(MEASUREMENT_ID);
     ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
   }, []);

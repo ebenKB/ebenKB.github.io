@@ -13,6 +13,9 @@ import { getTrimmedText} from "../../utils/app";
 import ReactGA from "react-ga4";
 import {Helmet} from "react-helmet"
 import PageHeader from "../../components/PageHeader/PageHeader"
+import FixedLoader from '../../components/FixedLoader/FixedLoader';
+import { THEME } from '../../utils/constants';
+import { formatDistance } from 'date-fns';
 
 const Articles = (props) => {
   const [loading, setLoading] = useState(false);
@@ -25,9 +28,9 @@ const Articles = (props) => {
     getArticles();
   }, []);
 
-  useEffect(() => {
-    ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
-  }, []);
+  // useEffect(() => {
+  //   ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
+  // }, []);
 
   const getArticles = async () => {
     setLoading(true);
@@ -48,28 +51,33 @@ const Articles = (props) => {
       </Helmet>
       <div>
         <PageHeader render={() => (
-          <h3>Trending articles</h3>
+          <h3>Latest Articles</h3>
         )} />
-        {loading && <Loader />}
+        {loading &&  <FixedLoader />}
         {latestArticle && <Link to={`/articles/${latestArticle.slug}`}>
           <ImageWithText
             imageUrl={latestArticle._embedded['wp:featuredmedia'][0].source_url}
-            caption={getTrimmedText(latestArticle.title.rendered)}
+            caption={latestArticle.title.rendered}
             fixed={false}
+            pubDate={`Published ${formatDistance(new Date(latestArticle.date), new Date())} ago`}
           />
         </Link>}
         <div className={styles.wrapper}>
-          <Grid container spacing={3} classes={{root: styles.content}} >
+          <Grid container spacing={0} classes={{root: styles.content}} >
               {allArticles.map((article) => (
-                <Grid item xs={6}>
-                  <Link to={`/articles/${article.slug}`}>
-                    <ImageCaption  
-                      imageUrl={article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url}
-                      caption={getTrimmedText(article.title.rendered)}
-                      fixed
-                    />
-                  </Link>
-                </Grid>
+                <div className="mb-12 w-full">
+                  <Grid item xs={12}>
+                    <Link to={`/articles/${article.slug}`}>
+                      <ImageCaption  
+                        imageUrl={article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url}
+                        caption={getTrimmedText(article.title.rendered)}
+                        fixed={false}
+                        theme={THEME.DARK}
+                        curve={false}
+                      />
+                    </Link>
+                  </Grid>
+                </div>
               ))}
           </Grid>
         </div>

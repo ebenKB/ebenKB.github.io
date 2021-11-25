@@ -1,0 +1,12 @@
+.wrapper {
+  position: absolute;
+  top: 80px;
+  z-index: 999;
+  left: auto;
+  left: calc((100vw / 2) - 20px);
+}
+
+.spinner {
+  color: var(--offWhite);
+  padding: 4px;
+}

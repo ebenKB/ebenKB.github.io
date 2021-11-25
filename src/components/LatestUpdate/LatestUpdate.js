@@ -9,6 +9,7 @@ import Loader from '../Loader/Loader';
 import { Link } from 'react-router-dom';
 import { getTrimmedText } from '../../utils/app';
 import ImageCaption from '../ImageCaption/ImageCaption';
+import { THEME } from '../../utils/constants';
 
 const LatestUpdate = (props) => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const LatestUpdate = (props) => {
   const getLatestUpdate = async () => {
     setLoading(true);
     const res = await Axios.get(`https://heritage.bypulse.africa/wp-json/wp/v2/articles?_embed&per_page=5`);
-    // dispatch(addArticles(res.data))
+    dispatch(addArticles(res.data))
     setLoading(false);
   }
 
@@ -27,7 +28,7 @@ const LatestUpdate = (props) => {
     getLatestUpdate();
   }, [])
   return (
-    <div className="text-xs wrapper">
+    <div className="text-xs wrapper mt-">
       <h3 style={{marginBottom: "8px"}} className="text-gray-700 font-bold">Latest Updates</h3>
       {latestArticle && (
       <div className="story-item_wrapper">
@@ -45,12 +46,14 @@ const LatestUpdate = (props) => {
       {loading && <Loader />}
         <Grid container spacing={2}>
           {allRecentArticles && allRecentArticles.map((article) => (
-            <Grid item xs={6}>
+            <Grid item xs={6} >
               <Link to={`/articles/${article.slug}`} className="App-link">
                 <ImageCaption
                   imageUrl={article._embedded['wp:featuredmedia'] && article._embedded['wp:featuredmedia'][0].source_url}
-                  caption={getTrimmedText(article.title.rendered)}
+                  caption={getTrimmedText(article.title.rendered, 20)}
                   fixed
+                  theme={THEME.WHITE}
+                  curve
                 />
               </Link>
             </Grid>

@@ -41,9 +41,9 @@ const Events = props => {
     getEvents();
   }, []);
 
-  useEffect(() => {
-    ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
-  }, []);
+  // useEffect(() => {
+  //   ReactGA.send({hitType: "pageview", page: window.location.pathname + window.location.search})
+  // }, []);
 
   return (
     <>

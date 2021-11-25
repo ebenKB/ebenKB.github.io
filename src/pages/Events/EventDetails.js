@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { format } from "date-fns";
 import { scrollToTop } from '../../utils/app';
-
+import PageHeader from '../../components/PageHeader/PageHeader';
 
 const EventDetails = (props) => {
   const { slug } = useParams();
@@ -31,6 +31,9 @@ const EventDetails = (props) => {
 
   return (
     <div>
+      <PageHeader render={() => (
+        <h3>Events</h3>
+      )} />
       <div className="container pt-5">
         <h3 className="font-bold" dangerouslySetInnerHTML={{__html:event.acf.title}} />
         <p className="text-justify">{event.acf.description}</p>

@@ -1,11 +1,20 @@
 import React from 'react'
 import styles from "./style.module.css";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as Home } from "../../assets/images/home.svg";
-import { ReactComponent as Overlap } from "../../assets/images/overlap.svg";
-import { ReactComponent as Video } from "../../assets/images/video-camera.svg";
-import { ReactComponent as Event } from "../../assets/images/calendar.svg";
-import { ReactComponent as Send } from "../../assets/images/send.svg";
+// import { ReactComponent as Home } from "../../assets/images/home.png";
+// import { ReactComponent as Overlap } from "../../assets/images/overlap.svg";
+// import { ReactComponent as Video } from "../../assets/images/video.png";
+// import { ReactComponent as Event } from "../../assets/images/ticket.png";
+
+import Home from "../../assets/images/home.png";
+import Video from "../../assets/images/video.png";
+import Event from "../../assets/images/ticket.png";
+import Article from "../../assets/images/article.png";
+
+// import { ReactComponent as Article } from "../../assets/images/article.png";
+// import { ReactComponent as List } from "../../assets/images/list.svg";
+import { ReactComponent as Location } from "../../assets/images/location.svg";
+// import Location from "../../assets/images/place.png"
 
 const Navigation = () => {
 
@@ -27,7 +36,8 @@ const Navigation = () => {
             isActive={(match, loc) => isActiveLink(match, loc, "")}
           >
             <div className={styles.navItem}>
-              <Home className={styles.navIcon} />
+              {/* <Home className={styles.navIcon} /> */}
+              <img src={Home} alt="" className={styles.navIcon} />
             </div>
           </NavLink>
         </div>
@@ -38,7 +48,8 @@ const Navigation = () => {
             isActive={(match, loc) => isActiveLink(match, loc, "articles")}
           >
             <div className={styles.navItem}>
-              <Overlap className={styles.navIcon} />
+              {/* <Article className={styles.navIcon} /> */}
+              <img src={Article} alt="" className={styles.navIcon} />
             </div>
           </NavLink>
         </div>
@@ -49,7 +60,8 @@ const Navigation = () => {
             isActive={(match, loc) => isActiveLink(match, loc, "videos")}
           >
             <div className={styles.navItem}>
-              <Video className={styles.navIcon} />
+              {/* <Video className={styles.navIcon} /> */}
+              <img src={Video} alt="" className={styles.navIcon} />
             </div>
           </NavLink>
         </div>
@@ -60,7 +72,8 @@ const Navigation = () => {
             isActive={(match, loc) => isActiveLink(match, loc, "events")}
           >
             <div className={styles.navItem}>
-              <Event className={styles.navIcon} />
+              {/* <Event className={styles.navIcon} /> */}
+              <img src={Event} alt="" className={styles.navIcon} />
             </div>
           </NavLink>
         </div>
@@ -71,7 +84,7 @@ const Navigation = () => {
             isActive={(match, loc) => isActiveLink(match, loc, "places")}
           >
             <div className={styles.navItem}>
-              <Send className={styles.navIcon} />
+              <Location className={styles.navIcon} />
             </div>
           </NavLink>
         </div>

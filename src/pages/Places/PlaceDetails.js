@@ -4,6 +4,7 @@ import HScrollList from "../../components/HorizontalScrollList/HorizontalScrollL
 import { useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import Map from "../../components/GoogleMap/GoogleMap";
+import PageHeader from "../../components/PageHeader/PageHeader"
 
 const PlaceDetails = (props) => {
   const { slug } = useParams();
@@ -11,6 +12,7 @@ const PlaceDetails = (props) => {
 
   return (
     <div>
+      <PageHeader render={() => <h3>Places</h3>} />
       { place && (
         <>
           <div className="container pt-5">

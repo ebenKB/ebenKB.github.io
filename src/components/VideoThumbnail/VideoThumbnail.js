@@ -3,8 +3,9 @@ import styles from "./style.module.css";
 import { ReactComponent as VideoIcon } from "../../assets/images/play.svg";
 import { Link } from "react-router-dom";
 import ItemCaption from '../ItemCaption/ItemCaption';
+import { THEME } from '../../utils/constants';
 
-const VideoThumbnail = ({ path="articles", size, dataId, curve = false, embed_caption="", caption="", imageUrl = "https://pbs.twimg.com/media/EWOUhggVcAE7WKA.jpg", type}) => {
+const VideoThumbnail = ({ path="articles", size, dataId, curve = false, embed_caption="", caption="", imageUrl = "", theme=THEME.WHITE, type}) => {
   const thumbnailStyle = (imageUrl) => {
     return {
       backgroundImage: `url(${imageUrl})`,
@@ -34,11 +35,13 @@ const VideoThumbnail = ({ path="articles", size, dataId, curve = false, embed_ca
         )}
       </div>
       { caption !== "" && (
-        // <p className={`${styles.caption}`} dangerouslySetInnerHTML={{__html: caption}} />
-        <ItemCaption />
+        theme === THEME.DARK ? (<ItemCaption caption={caption} />)
+        : (<p className={`font-bold ${styles.caption}`} dangerouslySetInnerHTML={{__html: caption}} />)
       )}
     </Link>
   )
 }
 
 export default VideoThumbnail
+
+        

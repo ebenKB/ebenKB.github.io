@@ -1,0 +1,16 @@
+.video_wrapper {
+  position: fixed;
+  height: 180px;
+  width: 100%;
+}
+
+.video_wrapper_offset {
+  height: 200px;
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.title {
+  padding: 8px 16px;
+  background: white;
+}

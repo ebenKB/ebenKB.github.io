@@ -7,7 +7,10 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 import YoutubeEmbed from '../../components/YoutubeEmbed.js/YoutubeEmbed';
-import { scrollToTop } from '../../utils/app';
+import { getTrimmedText, scrollToTop } from '../../utils/app';
+import PageHeader from "../../components/PageHeader/PageHeader"
+import styles from "./style.module.css";
+// import Divider from "../../components/CustomDivider/Divider"
 
 const VideoDetails = () => {
   const { slug } = useParams();
@@ -32,18 +35,26 @@ const VideoDetails = () => {
   
   return (
     <div>
-      <div className="container pt-5">
+      <PageHeader render={() => (
+        <h3>Videos</h3>
+      )} />
+      {/* <div className="container pt-5">
         <h3 className="font-bold" dangerouslySetInnerHTML={{__html: video.title.rendered}}/>
-      </div>
+      </div> */}
       {video && (
         <>
+        <div className={styles.video_wrapper}>
           {!video.acf.youtube_url && video.acf.video_url &&
-            <VideoPlayer caption={video.title.rendered} videoUrl={video.acf.video_url}/>}
-          {video.acf.youtube_url && 
-            <YoutubeEmbed
-              embedId={video.acf.youtube_video_id}
-              title={video.title.rendered}
-            />}
+              <VideoPlayer title={video.title.rendered} videoUrl={video.acf.video_url}/>}
+            {video.acf.youtube_url && 
+              <YoutubeEmbed
+                embedId={video.acf.youtube_video_id}
+                title={video.title.rendered}
+              />}
+          {/* <div className={`container pt-1 ${styles.video_title}`}>
+            <h3 className="font-bold" dangerouslySetInnerHTML={{__html: video.title.rendered}}/>
+          </div> */}
+        </div>
           <div className="container">
             <div className="mt-5">
               {relatedVideos && relatedVideos.length > 0 ? <h2 className="font-bold">Related Videos</h2> : null}
@@ -51,7 +62,7 @@ const VideoDetails = () => {
                 {relatedVideos && relatedVideos.map((relVid) => (
                   <Grid item xs={6}>
                     <VideoThumbnail 
-                      caption={relVid.title.rendered}
+                      caption={getTrimmedText(relVid.title.rendered)}
                       imageUrl={relVid.acf.thumbnail}
                       curve
                       dataId={relVid.slug}

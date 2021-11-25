@@ -1,9 +1,9 @@
-export const getTrimmedText = (text) => {
-  if (text.length < 41){
+export const getTrimmedText = (text, size=40) => {
+  if (text.length < size){
     return text;
   }
 
-  return `${text.substring(0, 40)}...`
+  return `${text.substring(0, size)}...`
 }
 
 export const scrollToTop = () => {

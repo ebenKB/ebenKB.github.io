@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom';
 import Axios from 'axios';
 import { getTrimmedText, scrollToTop } from "../../utils/app";
 import { Grid } from '@material-ui/core';
+import PageHeader from "../../components/PageHeader/PageHeader"
 
 const ArticleDetails = () => {
   const { slug } = useParams();
@@ -38,17 +39,19 @@ const ArticleDetails = () => {
   }, [currentArticle, slug]);
 
   return (
-    <div className={`${styles.detailsWrapper} font-bold`}>
+    <>
+    <PageHeader render={() => (
+      <h3>Articles</h3>
+    )} />
+    <div className={`${styles.detailsWrapper}`}>
       {currentArticle && (
         <>
-          <div className="mt-10">
+          <div className="mt-5">
             <h2 className="font-bold">{currentArticle.acf.title}</h2>
           </div>
           <ImageCaption
             imageUrl={currentArticle._embedded['wp:featuredmedia'] && currentArticle._embedded['wp:featuredmedia'][0].source_url} 
-            caption={(
-              <span dangerouslySetInnerHTML={{__html: currentArticle._embedded['wp:featuredmedia'] !== undefined ? currentArticle._embedded['wp:featuredmedia'][0].caption.rendered : null}} />
-            )}
+            caption={currentArticle._embedded['wp:featuredmedia'] !== undefined ? currentArticle._embedded['wp:featuredmedia'][0].caption.rendered : null}
           />
           <div className={`${styles.content} text-justify`}>
             <HashTag rawTags={currentArticle.tags} />
@@ -66,7 +69,8 @@ const ArticleDetails = () => {
                   <ImageCaption
                     imageUrl={relArticle._embedded['wp:featuredmedia'] && relArticle._embedded['wp:featuredmedia'][0].source_url} 
                     fixed
-                    caption={getTrimmedText(relArticle.title.rendered)}
+                    caption={getTrimmedText(relArticle.title.rendered, 18)}
+                    curve
                   />
                 </Link>
               </Grid>
@@ -75,6 +79,7 @@ const ArticleDetails = () => {
         </>
       )}
     </div>
+  </>
   )
 }
 

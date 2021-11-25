@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import Loader from '../Loader/Loader';
 import { getTrimmedText } from '../../utils/app';
 import { addFeaturedContent } from '../../features/featuredContents/featuredContentsSlice';
+import FixedLoader from '../FixedLoader/FixedLoader';
+import HeroText from '../HeroText/HeroText';
 
 const CarouselWrapper = (props) => {
   const [loading, setLoading] = useState(false);
@@ -54,7 +56,7 @@ const CarouselWrapper = (props) => {
   }, [featuredTag])
 
   const contentStyle = {
-    height: '180px',
+    maxHeight: '200px',
     width: "100%",
     textAlign: 'center',
     background: '#364d79',
@@ -63,7 +65,7 @@ const CarouselWrapper = (props) => {
 
   return (
     <div className="carousel_wrapper">
-      {loading && <Loader />}
+      {loading && <FixedLoader />}
       {featuredArticles && (
         <>
           <div className="controls">
@@ -71,28 +73,24 @@ const CarouselWrapper = (props) => {
             <div className="item navRight" onClick={() => carousel.current.next()}><RightCircleOutlined /></div>
           </div>
           <Carousel
-            // afterChange={onChange}
             autoplay={false}
             dotPosition="bottom"
             arrows={false} 
             ref={carousel}
-            // dotsClass="dot-class"
-            // nextArrow={<div style={{ position: "absolute", zIndex:"3", color: "red", background: "red", width: "40px", height: "40px"}}><RightCircleOutlined /> </div>}
-            // prevArrow={(<div><LeftCircleOutlined /></div>)
           >
             {featuredArticles.map((article) => (
-              <div className="carousel_content">
-                <div style={contentStyle}>
-                  <Link to={`/articles/${article.id}`}>
-                    <img style={contentStyle} 
-                    src={article._embedded["wp:featuredmedia"] && article._embedded["wp:featuredmedia"][0].source_url} alt=""
-                  />
-                  </Link>
+              <>
+                <div className="carousel_content">
+                  <div style={contentStyle}>
+                    <Link to={`/articles/${article.slug}`}>
+                      <img style={contentStyle} 
+                      src={article._embedded["wp:featuredmedia"] && article._embedded["wp:featuredmedia"][0].source_url} alt=""
+                    />
+                    </Link>
+                  </div>
                 </div>
-                <div className="carousel_title">
-                  <p dangerouslySetInnerHTML={{__html: getTrimmedText(article.title.rendered)}} />
-                </div>
-              </div>
+                <HeroText text={getTrimmedText(article.title.rendered, 100)} />
+              </>
             ))}
           </Carousel>
         </>
